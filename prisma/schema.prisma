@@ -1,0 +1,73 @@
+
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         Int        @id @default(autoincrement())
+  name       String
+  email      String     @unique
+  password   String?
+  role       Role       @default(USER)
+  phone      String
+  picture    String?
+  status     UserStatus @default(ACTIVE)
+  isVerified Boolean    @default(false)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  categories Category[]
+  posts      Post[]
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  picture  String?
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+  posts     Post[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Post {
+  id         Int      @id @default(autoincrement())
+  title      String
+  content    String
+  plantType    String?
+  thumbnail  String?
+  isFeatured Boolean  @default(false)
+  tags       String[]
+  views      Int      @default(0)
+
+  authorId   Int
+  author     User     @relation(fields: [authorId], references: [id])
+
+  categoryId Int?
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  MODERATOR
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  BLOCK
+}

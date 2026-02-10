@@ -1,0 +1,40 @@
+{
+  "name": "next-blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+     "dev": "npx tsx watch src/server.ts",
+  "build": "prisma generate && tsup src/server.ts --format esm --platform node --target node20 --outDir api",
+  "postinstall": "prisma generate"
+  },
+  "keywords": [],
+  "author": "Next Level Web Development",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "@prisma/adapter-pg": "^7.3.0",
+    "@prisma/client": "^7.3.0",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "http": "^0.0.1-security",
+    "next-auth": "^4.24.13",
+    "pg": "^8.18.0",
+    "sonner": "^2.0.7",
+    "ts-node-dev": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/compression": "^1.8.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.10.9",
+    "@types/pg": "^8.16.0",
+    "dotenv": "^17.2.3",
+    "prisma": "^7.3.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

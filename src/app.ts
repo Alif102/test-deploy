@@ -5,7 +5,7 @@ import { userRouter } from "./modules/user/user.routes";
 import { postRouter } from "./modules/post/post.router";
 import { authRouter } from "./modules/auth/auth.router";
 import { CategoryRouter } from "./modules/category/category.router";
-
+import { Request, Response, NextFunction } from "express";
 const app = express();
 
 // Middleware
@@ -24,7 +24,7 @@ app.use("/api/v1/categories", CategoryRouter);
 app.use("/api/v1/post", postRouter);
 app.use("/api/v1/auth", authRouter);
 // Default route for testing
-app.get("/", (_req, res) => {
+app.get("/", (_req: Request, res: Response) => {
   res.send("API is running");
 });
 
